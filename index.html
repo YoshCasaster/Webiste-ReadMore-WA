@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bikin Teks Baca Selengkapnya di WA</title>
+  <meta name="description" content="Bikin Teks Baca Selengkapnya di WA">
+  <meta property="og:title" content="Teks Baca Selengkapnya di WA">
+  <meta property="og:description" content="Bikin Teks Baca Selengkapnya di WA">
+  
+  <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    .dark-mode {
+      background-color: #212529;
+      color: #f8f9fa;
+    }
+    .dark-mode .form-control {
+      background-color: #343a40;
+      color: #f8f9fa;
+      border: 1px solid #495057;
+    }
+    .dark-mode .btn {
+      background-color: #495057;
+      color: #f8f9fa;
+    }
+    .dark-mode pre {
+      background-color: #343a40;
+      color: #f8f9fa;
+    }
+    .dark-mode .border {
+      border-color: #495057;
+    }
+  </style>
+
+  <!-- Google Ads and Analytics -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020080110587958" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J2BR7TFLN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J2BR7TFLN2');
+  </script>
+
+  <!-- Custom JS -->
+  <script>
+    // Menghitung berapa kali website dikunjungi oleh user
+    if (localStorage.getItem("siteVisits")) {
+      localStorage.setItem("siteVisits", parseInt(localStorage.getItem("siteVisits")) + 1);
+    } else {
+      localStorage.setItem("siteVisits", 1);
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("visitCount").innerText = localStorage.getItem("siteVisits");
+    });
+
+    // Menghitung berapa kali tombol "Copy" diklik
+    if (localStorage.getItem("copyClicks")) {
+      localStorage.setItem("copyClicks", parseInt(localStorage.getItem("copyClicks")));
+    } else {
+      localStorage.setItem("copyClicks", 0);
+    }
+
+    function copySpoilerMessage() {
+      var messageField = document.getElementById('message');
+      messageField.select();
+      document.execCommand('copy');
+      alert("Pesan berhasil disalin!");
+
+      // Tambah jumlah klik tombol "Copy"
+      localStorage.setItem("copyClicks", parseInt(localStorage.getItem("copyClicks")) + 1);
+      document.getElementById("copyCount").innerText = localStorage.getItem("copyClicks");
+    }
+
+    // Toggle dark mode
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+
+      // Save the mode to localStorage
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+      } else {
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+    // Load theme from localStorage
+    function loadTheme() {
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    }
+
+    window.onload = loadTheme;
+  </script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h3 class="text-center">Membuat Teks Baca Selengkapnya di WA</h3>
+    <h5 class="text-center text-muted">YoshCassaster</h5>
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="text-right mb-3">
+      <button class="btn btn-secondary" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </div>
+
+    <div class="text-center my-4">
+      <img src="/bukti.jpeg" class="img-fluid rounded" alt="Teks Baca Selengkapnya">
+    </div>
+
+    <!-- Menghitung jumlah kunjungan -->
+    <div class="text-center mb-4">
+      <p>Jumlah kunjungan website ini: <span id="visitCount"></span></p>
+    </div>
+
+    <form id="spoilerForm">
+      <div class="form-group">
+        <label for="warning">Teks Terlihat</label>
+        <textarea class="form-control" id="warning" placeholder="Masukkan teks yang terlihat"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="content">Teks Yang Tersembunyi</label>
+        <textarea id="content" class="form-control" placeholder="Masukkan teks yang tersembunyi"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="separator">Pilih Pemisah</label>
+        <select class="form-control" id="separator">
+          <option value=" " selected>Tanpa Baris Kosong</option>
+          <option value="\n\n\n\n\n">Sisipkan Baris Kosong</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="paddingLength">Jumlah Padding (Spasi)</label>
+        <input type="number" class="form-control" id="paddingLength" value="4000">
+      </div>
+      
+      <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="iosCompatibilityCheck">
+        <label class="form-check-label" for="iosCompatibilityCheck">Aktifkan Mode iOS?</label>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" onclick="createSpoilerMessage()">Buat Teks</button>
+      <button type="button" class="btn btn-secondary btn-block" onclick="resetForm()">Reset</button>
+    </form>
+
+    <div class="form-group mt-4">
+      <label for="message">Hasil</label>
+      <textarea id="message" class="form-control" rows="4" readonly></textarea>
+      <button class="btn btn-success btn-block mt-2" onclick="copySpoilerMessage()">Copy</button>
+    </div>
+
+    <!-- Menghitung jumlah klik tombol Copy -->
+    <div class="text-center mt-4">
+      <p>Tombol "Copy" sudah diklik: <span id="copyCount">0</span> kali</p>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="form-group mt-4">
+      <h5>Pratinjau Pesan:</h5>
+      <pre id="messagePreview" class="p-3 border rounded" style="background-color: #f8f9fa;"></pre>
+    </div>
+
+    <div class="text-center mt-4">
+      <p>Github: <a href="https://github.com/YoshCasaster" class="text-primary">YoshCassaster</a></p>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript: Bootstrap and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
